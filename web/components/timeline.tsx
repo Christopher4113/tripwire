@@ -68,7 +68,7 @@ const BADGE = {
 export function VerdictBadge({ verdict }: { verdict: Verdict }) {
   const b = BADGE[verdict.label];
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div data-testid="verdict" className="flex flex-wrap items-center gap-3">
       <span className={`rounded-md px-3 py-1.5 font-heading text-2xl font-bold tracking-wide ${b.cls}`}>{b.text}</span>
       <span className="text-sm text-muted-foreground">{verdict.detail}</span>
     </div>

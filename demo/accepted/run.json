@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "config": "local source 01b7410a4f82",
+  "steps": [
+    {
+      "step": "web /Users/[user]/Documents/Take Homes/tripwire/demo/storyboard.toml",
+      "ok": true,
+      "seconds": 85.0
+    },
+    {
+      "step": "edit /Users/[user]/Documents/Take Homes/tripwire/demo/edit.toml",
+      "ok": true,
+      "seconds": 40.5
+    }
+  ],
+  "ok": true,
+  "unchecked": 38,
+  "flagged": 16,
+  "kept": [],
+  "scan_status": "completed",
+  "review_status": "completed",
+  "errors": [],
+  "inputs": {
+    "config_sha256": "aa7d5f63972b4dbe991d0837f8f506dc8bb5173900e1fa35a9c63f71b4b0afed",
+    "reshoot": "0.3.15",
+    "stories": [
+      {
+        "sha256": "6930c563878e08e90be3eb1a4c7b18f4312f55f70f3b09fc74bdf4751df68946",
+        "kind": "web"
+      }
+    ],
+    "render_state": {
+      "schema_version": 1,
+      "sha256": "2ddad693ae96df70942db6fcc51291c72c83d61830da0b521e6220733408e2e1",
+      "files": [
+        {
+          "key": "project",
+          "kind": "project",
+          "path": "reshoot.toml",
+          "sha256": "aa7d5f63972b4dbe991d0837f8f506dc8bb5173900e1fa35a9c63f71b4b0afed"
+        },
+        {
+          "key": "take:0",
+          "kind": "story",
+          "path": "storyboard.toml",
+          "sha256": "6930c563878e08e90be3eb1a4c7b18f4312f55f70f3b09fc74bdf4751df68946"
+        },
+        {
+          "key": "edit",
+          "kind": "edit",
+          "path": "edit.toml",
+          "sha256": "9fdec3a0fd5bd71bb1694de90ffa819a048f475c84806d3ef6d7db73305cf02e"
+        }
+      ]
+    },
+    "capture_state": {
+      "schema_version": 1,
+      "sha256": "2ddad693ae96df70942db6fcc51291c72c83d61830da0b521e6220733408e2e1",
+      "files": [
+        {
+          "key": "project",
+          "kind": "project",
+          "path": "reshoot.toml",
+          "sha256": "aa7d5f63972b4dbe991d0837f8f506dc8bb5173900e1fa35a9c63f71b4b0afed"
+        },
+        {
+          "key": "take:0",
+          "kind": "story",
+          "path": "storyboard.toml",
+          "sha256": "6930c563878e08e90be3eb1a4c7b18f4312f55f70f3b09fc74bdf4751df68946"
+        },
+        {
+          "key": "edit",
+          "kind": "edit",
+          "path": "edit.toml",
+          "sha256": "9fdec3a0fd5bd71bb1694de90ffa819a048f475c84806d3ef6d7db73305cf02e"
+        }
+      ]
+    },
+    "fixtures": [],
+    "recording_config_sha256": "e3218f8d17e29b9e9d66ac4bd30d12860986ea0733f8f29a7cb5a5edd3089fc6",
+    "edit_sha256": "9fdec3a0fd5bd71bb1694de90ffa819a048f475c84806d3ef6d7db73305cf02e",
+    "tracked_diff_sha256": "69bd1e1a343f1b416edb6a78a85aab7388b0340dc095bb265dad66b3229e2d48",
+    "commit": "b177993613c32eb774688a032bd1915ef134ab09",
+    "dirty": true,
+    "dirty_index_sha256": "f7480713a5b916612246ed18c3b6d04f547f9810bfc2cc7b7d278cb17f42e82a"
+  },
+  "id": "7f520b02fb8e454ca822169f1e83208b",
+  "exports": {},
+  "mode": "final",
+  "review": "/Users/christopher/Documents/Take Homes/tripwire/demo/takes/runs/7f520b02fb8e454ca822169f1e83208b/review",
+  "seconds": 147.4,
+  "finished_at": "2026-11-14T04:05:45.118444+00:00",
+  "files": [
+    {
+      "path": "takes/demo.take.json",
+      "sha256": "3ffc77a30697aa46c6c7b160ee0e0723e58aeb04a6249b771b6ec74511564c86"
+    },
+    {
+      "path": "takes/demo.evidence/run-a1.png",
+      "sha256": "51fed6452a4d31b8e361d1c77f96209f83169443c1cb1a9f9e5aeef925a6c131"
+    },
+    {
+      "path": "takes/demo.evidence/run-a3.png",
+      "sha256": "1873fcdb2560f7a9cca829afd069344926e2396cf095e73a873afc8f53233a16"
+    },
+    {
+      "path": "takes/demo.evidence/results.png",
+      "sha256": "7f0a01ec06f723f0c432692c852d2883db5368929b6b21ad75f1fb4800ba8387"
+    },
+    {
+      "path": "takes/demo.evidence/patched-b1.png",
+      "sha256": "bb0f64b4605c92ce1f65a6b75ac68d9dac62edb1d908247905fb3b48f4f4b4af"
+    },
+    {
+      "path": "takes/demo.evidence/end.png",
+      "sha256": "7f0a01ec06f723f0c432692c852d2883db5368929b6b21ad75f1fb4800ba8387"
+    },
+    {
+      "path": "takes/demo.evidence/attack.png",
+      "sha256": "552b6268f071e06e7a6117fcd51b9a4101f8c50a5974c057de8b48d7ad790b58"
+    },
+    {
+      "path": "takes/demo.evidence/directive.png",
+      "sha256": "552b6268f071e06e7a6117fcd51b9a4101f8c50a5974c057de8b48d7ad790b58"
+    }
+  ],
+  "expectations_status": "passed",
+  "expectations_count": 6,
+  "record": true
+}

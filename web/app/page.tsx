@@ -48,6 +48,12 @@ export default function Home() {
         setScenarios(s);
         setMeta(m);
         setModel(m.has_key ? m.model : "mock:obedient");
+        // Deep links such as ?scenario=A3-issue-email-exfil&variant=patched (shareable, and used by demo takes).
+        const q = new URLSearchParams(window.location.search);
+        const sid = q.get("scenario");
+        const vid = q.get("variant");
+        if (sid && s.some((x) => x.id === sid)) setScenarioId(sid);
+        if (vid && m.variants.some((x) => x.id === vid)) setVariant(vid);
       },
       (e) => setLoadErr(String(e.message ?? e)),
     );
@@ -154,7 +160,7 @@ export default function Home() {
                     <SelectTrigger className="w-full min-w-0 text-[15px] text-foreground data-[size=default]:h-11 sm:min-w-72" aria-label="Scenario">
                       <SelectValue>{(v: string) => `${v} · ${scenarios.find((s) => s.id === v)?.label ?? ""}`}</SelectValue>
                     </SelectTrigger>
-                    <SelectContent alignItemWithTrigger={false}>
+                    <SelectContent>
                       {scenarios.map((s) => (
                         <SelectItem key={s.id} value={s.id} className="py-2">
                           <span className="font-mono">{s.id}</span>
@@ -188,7 +194,7 @@ export default function Home() {
                     <SelectTrigger className="min-w-48 font-mono text-[14px] text-foreground data-[size=default]:h-11" aria-label="Model">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent alignItemWithTrigger={false}>
+                    <SelectContent>
                       {[meta.model, "mock:obedient", "mock:careful"].map((m) => (
                         <SelectItem key={m} value={m} disabled={!m.startsWith("mock:") && !meta.has_key} className="py-2 font-mono">
                           {m}

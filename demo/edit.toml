@@ -1,0 +1,28 @@
+schema_version = 1
+output = "demo-final.mp4"
+trim_waits = true   # model latency is shortened and labelled "Wait shortened"
+
+[style]
+background = ["#17111f", "#2a1d3a"]
+foreground = "#fbfaf6"
+
+[[part]]
+card = "GitHub signs the delivery. Strangers write the text."
+duration = 2.5
+
+[[part]]
+take = 0
+start = 0
+end = "end"
+
+[[part]]
+card = "300 real runs · 0 attacks landed · patch in the repo"
+duration = 3
+
+[[export]]
+name = "1080p"
+width = 1920
+height = 1080
+
+[[export]]
+preset = "readme"   # an 800x450 GIF, checked against GitHub's 10 MB limit
