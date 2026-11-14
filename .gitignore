@@ -1,0 +1,8 @@
+runs/
+.venv/
+__pycache__/
+web/node_modules/
+web/.next/
+.env
+.playwright-mcp/
+*.tsbuildinfo

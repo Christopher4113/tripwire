@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-funnel);
+  --color-lavender: var(--lavender);
+  --color-peach: var(--peach);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-safe: var(--safe);
+  --color-safe-soft: var(--safe-soft);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* Inkbox's ink purple (#3E2A53) taken dark for a filmed demo; cream text is their #FBFAF6. */
+  --background: #17111f;
+  --foreground: #fbfaf6;
+  --card: #211a2c;
+  --card-foreground: #fbfaf6;
+  --popover: #2a2138;
+  --popover-foreground: #fbfaf6;
+  --primary: #fbfaf6;
+  --primary-foreground: #2a1d3a;
+  --secondary: #2c2339;
+  --secondary-foreground: #fbfaf6;
+  --muted: #2c2339;
+  --muted-foreground: #b8adc9;
+  --accent: #3a2e4b;
+  --accent-foreground: #fbfaf6;
+  --destructive: #ff7a6b;
+  --border: #3a2f4a;
+  --input: #4a3d5c;
+  --ring: #c4b5ef;
+  --radius: 0.375rem;
+  /* Inkbox's lavender, lifted for dark surfaces: structure, links, focus. */
+  --lavender: #a996d6;
+  /* Inkbox's peach highlight ("anywhere"): used only to mark the risky policy sentences. */
+  --peach: #f6ad9c;
+  /* Status: reserved for verdicts and the recipients that decide them. */
+  --danger: #ff7a6b;
+  --danger-soft: rgb(255 122 107 / 0.14);
+  --safe: #74d9a6;
+  --safe-soft: rgb(116 217 166 / 0.13);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+@layer base {
+  a[href], button:not(:disabled), summary, select, [role="tab"], [role="option"], [role="radio"], label[for] {
+    cursor: pointer;
+  }
+  button:disabled { cursor: not-allowed; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* Tool calls land one after another, so the viewer reads them in the order the agent made them. */
+@keyframes land { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.land { animation: land 260ms ease-out both; }
