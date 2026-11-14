@@ -80,7 +80,7 @@ def cmd_eval(args) -> int:
 
     def one(job):
         s, v, t = job
-        r = run_case(plugin, tools, sc.get(s["id"]), temps[v], args.model)
+        r = run_case(plugin, tools, sc.get(s["id"]), temps[v], args.model, args.harness)
         r.update(variant=v, trial=t)
         print(f"  {v:<12} {s['id']:<22} #{t} {r['verdict']['label']}: {r['verdict']['detail']}", file=sys.stderr)
         return r
@@ -89,9 +89,9 @@ def cmd_eval(args) -> int:
         results = list(pool.map(one, jobs))
     out = RUNS / f"eval-{time.strftime('%Y%m%d-%H%M%S')}"
     out.mkdir(parents=True, exist_ok=True)
-    meta = {"model": args.model, "trials": args.trials, "variants": variants, "results": results}
+    meta = {"model": args.model, "harness": args.harness, "trials": args.trials, "variants": variants, "results": results}
     (out / "results.json").write_text(json.dumps(meta, indent=2, default=str))
-    md = report_md(results, variants, args.trials, args.model)
+    md = report_md(results, variants, args.trials, f"{args.model}` via `{args.harness}")
     (out / "report.md").write_text(md)
     print(md)
     print(f"saved {out}", file=sys.stderr)
@@ -155,6 +155,8 @@ def main(argv: list[str] | None = None) -> None:
     common(s)
     s.add_argument("--variants", default="claude-code,hermes,patched")
     s.add_argument("--trials", type=int, default=5)
+    s.add_argument("--harness", default="api", choices=["api", "agent-sdk"],
+                   help="api: plain tool loop; agent-sdk: Claude Agent SDK + claude_code preset, like the plugin")
     s.set_defaults(fn=cmd_eval)
 
     s = sub.add_parser("redteam", help="adaptive attacker campaign")

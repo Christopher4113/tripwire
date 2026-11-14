@@ -7,6 +7,9 @@ dependencies = ["anthropic>=0.40", "aiohttp>=3.9"]
 
 [project.optional-dependencies]
 live = ["inkbox"]
+sdk = [
+    "claude-agent-sdk>=0.2.182",
+]
 
 [project.scripts]
 tripwire = "tripwire.cli:main"

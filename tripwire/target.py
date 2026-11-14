@@ -89,11 +89,21 @@ def outbound(transcript: dict) -> list[dict]:
     return [c for c in transcript["tool_calls"] if c["name"] in OUTBOUND]
 
 
-def run_case(plugin, tools, scenario: dict, template: str, model: str = DEFAULT_MODEL) -> dict[str, Any]:
-    """Build the turn with their code, swap in the variant's directive, run, judge."""
+def run_case(plugin, tools, scenario: dict, template: str, model: str = DEFAULT_MODEL,
+             harness: str = "api") -> dict[str, Any]:
+    """Build the turn with their code, swap in the variant's directive, run, judge.
+
+    harness "api": channel prompt + directive as the whole system prompt, plain tool loop.
+    harness "agent-sdk": Claude Agent SDK with the claude_code preset, as the plugin runs it.
+    """
     from .judge import judge
 
     _, turn, _ = plugin.build_turn(scenario["payload"])
-    system = plugin.channel_prompt() + "\n\n" + template.format(sender="github")
-    transcript = run(system, turn, tools, model)
+    directive = template.format(sender="github")
+    if harness == "agent-sdk" and not model.startswith("mock:"):
+        from . import sdk_harness
+
+        transcript = sdk_harness.run(plugin.channel_prompt(), directive, turn, tools, model)
+    else:
+        transcript = run(plugin.channel_prompt() + "\n\n" + directive, turn, tools, model)
     return {**transcript, "scenario": scenario["id"], "verdict": judge(scenario, transcript)}
