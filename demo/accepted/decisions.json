@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "run_id": "7f520b02fb8e454ca822169f1e83208b",
+  "binding": "f796dc453ccd4a477513edc8883fbf4b1554ea059bd799b6756f7acd9815e90f",
+  "decisions": {
+    "finding/1-1": "accepted",
+    "finding/1-2": "accepted",
+    "finding/1-3": "accepted",
+    "finding/1-4": "accepted",
+    "finding/2-1": "accepted",
+    "finding/2-2": "accepted",
+    "finding/2-3": "accepted",
+    "finding/2-4": "accepted",
+    "finding/3-1": "accepted",
+    "finding/3-2": "accepted",
+    "finding/3-3": "accepted",
+    "finding/3-4": "accepted",
+    "finding/4-1": "accepted",
+    "finding/4-2": "accepted",
+    "finding/4-3": "accepted",
+    "finding/4-4": "accepted",
+    "tripwire/attack": "accepted",
+    "tripwire/directive": "accepted",
+    "tripwire/end": "accepted",
+    "tripwire/patched-b1": "accepted",
+    "tripwire/results": "accepted",
+    "tripwire/run-a1": "accepted",
+    "tripwire/run-a3": "accepted",
+    "video": "accepted"
+  },
+  "recorded_by": "reshoot accept",
+  "recorded_at": "2026-11-14T04:06:46+00:00"
+}
