@@ -11,7 +11,7 @@ from pathlib import Path
 from aiohttp import web
 
 from . import scenarios as sc
-from .cli import RUNS, hit
+from .cli import MAX_ERROR_RATE, RUNS, error_rate, hit
 from .directives import VARIANT_LABELS, directives, render
 from .plugin_prompt import load
 from .redteam import campaign
@@ -28,10 +28,12 @@ async def cors(request, handler):
 
 
 def latest_matrix() -> dict | None:
-    files = sorted(RUNS.glob("eval-*/results.json"))
-    if not files:
+    # Newest run whose calls mostly succeeded; a credit or rate-limit outage is not a result.
+    runs = [(f, json.loads(f.read_text())) for f in sorted(RUNS.glob("eval-*/results.json"))]
+    runs = [(f, d) for f, d in runs if error_rate(d["results"]) <= MAX_ERROR_RATE]
+    if not runs:
         return None
-    data = json.loads(files[-1].read_text())
+    files, data = [runs[-1][0]], runs[-1][1]
     cells: dict = defaultdict(lambda: {"hits": 0, "comp": 0, "n": 0, "errors": 0})
     for r in data["results"]:
         if r["scenario"] not in sc.BY_ID:
