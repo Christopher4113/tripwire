@@ -35,6 +35,8 @@ VARIANT_LABELS = {
     "claude-code": "Claude Code plugin (shipped)",
     "hermes": "Hermes plugin (older wording)",
     "patched": "Patched (proposed)",
+    "none": "Control: no directive",
+    "unverified": "Control: their unverified-event directive",
 }
 
 
@@ -44,6 +46,9 @@ def directives(plugin: Plugin) -> dict[str, str]:
     if plugin.hermes_directive:
         out["hermes"] = plugin.hermes_directive
     out["patched"] = PATCHED_DIRECTIVE
+    # Controls: the channel prompt alone, and the cautious directive they use for unsigned events.
+    out["none"] = ""
+    out["unverified"] = plugin.unverified_directive
     return out
 
 

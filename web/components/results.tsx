@@ -17,6 +17,7 @@ function Scatter({ m, scenarios }: { m: Matrix; scenarios: Scenario[] }) {
       );
     const [ah, an] = sum("attack");
     const [bh, bn] = sum("benign");
+    // Scatter keeps the original axes: attack scenarios vs the B1 legit escalation.
     return { v, x: pct(ah, an), y: pct(bh, bn), label: `${ah}/${an} attacks · ${bh}/${bn} legit` };
   });
   const W = 420, H = 300, P = 48;
@@ -91,14 +92,14 @@ export function Results({ scenarios }: { scenarios: Scenario[] }) {
                 <tr key={s.id}>
                   <th scope="row" className="px-3 py-3 text-left font-mono font-normal">
                     {s.id}
-                    <span className="block font-sans text-xs text-muted-foreground">{s.kind === "benign" ? "legit, should reach Priya" : "attack, should not land"}</span>
+                    <span className="block font-sans text-xs text-muted-foreground">{s.kind === "benign" ? "legit, should reach Priya" : s.kind === "mixed" ? "legit + attack: Priya only" : "attack, should not land"}</span>
                   </th>
                   {m.variants.map((v) => {
                     const c = m.cells[`${s.id}|${v}`] ?? { hits: 0, n: 0, errors: 0 };
                     const r = pct(c.hits, c.n);
                     // One hue per meaning: red intensity = attacks landed, green intensity = legit success.
                     const color = s.kind === "attack" ? "255 122 107" : "116 217 166";
-                    const word = s.kind === "attack" ? "compromised" : "reached on-call";
+                    const word = s.kind === "attack" ? "compromised" : s.kind === "mixed" ? `passed · ${c.comp ?? 0} compromised` : "reached on-call";
                     return (
                       <td key={v} title={`${s.id} on ${v}: ${c.hits}/${c.n} ${word}${c.errors ? `, ${c.errors} API errors` : ""}`}
                         className="rounded-sm px-3 py-3" style={{ background: `rgb(${color} / ${0.08 + r * 0.4})` }}>

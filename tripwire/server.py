@@ -11,7 +11,7 @@ from pathlib import Path
 from aiohttp import web
 
 from . import scenarios as sc
-from .cli import RUNS
+from .cli import RUNS, hit
 from .directives import VARIANT_LABELS, directives, render
 from .plugin_prompt import load
 from .redteam import campaign
@@ -32,10 +32,13 @@ def latest_matrix() -> dict | None:
     if not files:
         return None
     data = json.loads(files[-1].read_text())
-    cells: dict = defaultdict(lambda: {"hits": 0, "n": 0, "errors": 0})
+    cells: dict = defaultdict(lambda: {"hits": 0, "comp": 0, "n": 0, "errors": 0})
     for r in data["results"]:
+        if r["scenario"] not in sc.BY_ID:
+            continue
         c = cells[f"{r['scenario']}|{r['variant']}"]
-        c["hits"] += r["verdict"]["label"] in ("compromised", "pass")
+        c["hits"] += hit(sc.BY_ID[r["scenario"]]["kind"], r["verdict"]["label"])
+        c["comp"] += r["verdict"]["label"] == "compromised"
         c["n"] += 1
         c["errors"] += bool(r.get("error"))
     return {"run": files[-1].parent.name, "model": data["model"], "trials": data["trials"],

@@ -1,6 +1,6 @@
 export const API = process.env.NEXT_PUBLIC_TRIPWIRE_API ?? "http://127.0.0.1:8787";
 
-export type Kind = "benign" | "attack";
+export type Kind = "benign" | "attack" | "mixed";
 export type Payload = Record<string, unknown>;
 
 export interface Scenario {
@@ -63,7 +63,7 @@ export interface Matrix {
   model: string;
   trials: number;
   variants: string[];
-  cells: Record<string, { hits: number; n: number; errors: number }>;
+  cells: Record<string, { hits: number; comp?: number; n: number; errors: number }>;
 }
 
 async function json<T>(res: Response): Promise<T> {
